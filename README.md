@@ -48,6 +48,8 @@ node index.js
 
 **`public`**: This directory is contains the output directory and this directory contains all json data and also the HTML and JavaScript code required to visualize the results.
 
+**`server`**: In this directory two .Js files available index.js and ipl.js. index.js is the entry point of this project and in ipl.js all JavaScript business logic available.
+
 **`eslintrc`**: ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
 
 **`node_modules`**: This directory is used by node and npm to store third party packages like `csvtojson`.

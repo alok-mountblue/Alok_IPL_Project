@@ -1,5 +1,13 @@
 # IPL Data Project
 
+IPL is an abbreviation of Indian Premier League.
+IPL is a professional cricket league played in India.
+Dataset can be available from (<https://www.kaggle.com/manasgarg/ipl>)
+The dataset will provide analysis on various cricket factors like the batsman, bowlers, number of matches, number of wins, etc.
+DataSets:
+(i) matches.csv
+(ii) deliveries.csv
+
 **1: Install Node**
 
 <https://nodejs.org/en/download/>
@@ -20,10 +28,10 @@ Windows: <https://gitforwindows.org/>
 git clone https://github.com/alok-mountblue/Alok_IPL_Project.git
 ```
 
-**5: Install npm packages**
+**5: Install npm convert-csv-to-json package**
 
 ```sh
- npm install <name>
+ npm install convert-csv-to-json --save
 ```
 
 **6: Prepare data**
@@ -45,3 +53,5 @@ node index.js
 **`node_modules`**: This directory is used by node and npm to store third party packages like `csvtojson`.
 
 **`index.js`**: This file contains the code which: 1. Reads the csv data 2. Calls the JavaScript business logic functions. 3. Saves the results in `public/output/.json`
+
+**`csvtojson`**: In order to do the CSV to JSON conversion, we'll be using the csvtojson package from NPM. This package is a comprehensive Node.js CSV parser to convert CSV to JSON or column arrays.

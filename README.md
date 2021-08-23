@@ -8,37 +8,39 @@ DataSets:
 (i) matches.csv
 (ii) deliveries.csv
 
-**1: Install Node**
+## 1: Install Node
 
 <https://nodejs.org/en/download/>
 
-**2: Install git**
+## 2: Install git\*\*
 
 Linux: <https://git-scm.com/downloads>
 
 Windows: <https://gitforwindows.org/>
 
-**3: Install VSCode**
+## 3: Install VSCode\*\*
 
 <https://code.visualstudio.com/download>
 
-**4: Clone this repository**
+## 4: Clone this repository\*\*
 
 ```sh
 git clone https://github.com/alok-mountblue/Alok_IPL_Project.git
 ```
 
-**5: Install npm convert-csv-to-json package**
+## 5: Install npm convert-csv-to-json package\*\*
 
 ```sh
  npm install convert-csv-to-json --save
 ```
 
-**6: Prepare data**
+## 6: Prepare data\*\*
 
-```
+```javascript
 node index.js
 ```
+
+---
 
 # Project Structure
 

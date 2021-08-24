@@ -47,10 +47,7 @@ function saveMatchesPlayedPerYear(result) {
 }
 
 function saveMatchesWonEachTeamPerYear(matcheWonPerY) {
-        const jsonData = {
-                matchesWonEachTeam: matcheWonPerY,
-        };
-        const jsonString = JSON.stringify(jsonData);
+        const jsonString = JSON.stringify(matcheWonPerY);
         fs.writeFile(JSON_OUTPUT_FILE_PATH_SECOND, jsonString, 'utf8', (err) => {
                 if (err) {
                         console.error(err);
@@ -59,10 +56,7 @@ function saveMatchesWonEachTeamPerYear(matcheWonPerY) {
 }
 
 function saveExtraRunsConcededByEach(resultExRun) {
-        const jsonData = {
-                extraRunsConcededByEach: resultExRun,
-        };
-        const jsonString = JSON.stringify(jsonData);
+        const jsonString = JSON.stringify(resultExRun);
         fs.writeFile(JSON_OUTPUT_FILE_PATH_THIRD, jsonString, 'utf8', (err) => {
                 if (err) {
                         console.error(err);

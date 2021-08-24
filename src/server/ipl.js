@@ -1,40 +1,41 @@
+/* eslint-disable operator-assignment */
 function matchesPlayedPerYear(matches) {
-        const result = {};
+        const obj = {};
         for (const match of matches) {
                 const { season } = match;
-                if (result[season]) {
-                        result[season] += 1;
+                if (obj[season]) {
+                        obj[season] = obj[season] + 1;
                 } else {
-                        result[season] = 1;
+                        obj[season] = 1;
                 }
         }
-        return result;
+        return obj;
 }
 
 function matchesWonByEachTeam(matches) {
-        const result = {};
+        const output = {};
         for (const match of matches) {
                 const { season } = match;
                 const { winner } = match;
 
-                if (result[season]) {
-                        if (result[season][winner]) {
-                                result[season][winner] += 1;
+                if (output[season]) {
+                        if (output[season][winner]) {
+                                output[season][winner] = output[season][winner] + 1;
                         } else {
-                                result[season][winner] = 1;
+                                output[season][winner] = 1;
                         }
                 } else {
-                        result[season] = {};
-                        result[season][winner] = 1;
+                        output[season] = {};
+                        output[season][winner] = 1;
                 }
         }
-        return result;
+        return output;
 }
 
 /* eslint-disable camelcase */
 function extraRunsByEachTeam(matches, deliveries) {
-        const result = {};
-        const teams = {};
+        const res = {};
+        const team = {};
 
         for (const match of matches) {
                 const { id } = match;
@@ -42,7 +43,7 @@ function extraRunsByEachTeam(matches, deliveries) {
                 const { team2 } = match;
                 // eslint-disable-next-line eqeqeq
                 if (match.season == 2016) {
-                        teams[id] = { team1, team2 };
+                        team[id] = { team1, team2 };
                 }
         }
 
@@ -50,16 +51,16 @@ function extraRunsByEachTeam(matches, deliveries) {
                 const { match_id } = delivery;
                 const extra_run = parseInt(delivery.extra_runs);
                 const { bowling_team } = delivery;
-                if (match_id in teams) {
-                        if (result[bowling_team]) {
-                                result[bowling_team] += extra_run;
+                if (match_id in team) {
+                        if (res[bowling_team]) {
+                                res[bowling_team] += extra_run;
                         } else {
-                                result[bowling_team] = extra_run;
+                                res[bowling_team] = extra_run;
                         }
                 }
         }
 
-        return result;
+        return res;
 }
 
 /* eslint-disable camelcase */
@@ -68,7 +69,7 @@ function extraRunsByEachTeam(matches, deliveries) {
 function topEconomicalBowlers(matches, deliveries) {
         const result = {};
 
-        const totalMatchesPlayedIn2015 = [];
+        const matchID = [];
 
         const economicBowlers = [];
 
@@ -77,7 +78,7 @@ function topEconomicalBowlers(matches, deliveries) {
                 const { id } = match;
                 // eslint-disable-next-line eqeqeq
                 if (match.season == 2015) {
-                        totalMatchesPlayedIn2015.push(id);
+                        matchID.push(id);
                 }
         }
 
@@ -87,17 +88,16 @@ function topEconomicalBowlers(matches, deliveries) {
                 const total_runs = parseInt(delivery.total_runs);
                 const extra_runs = parseInt(delivery.extra_runs);
                 const { bowler } = delivery;
-                if (totalMatchesPlayedIn2015.includes(match_id)) {
+                if (matchID.includes(match_id)) {
                         if (result[bowler]) {
                                 result[bowler].runs += total_runs;
                                 result[bowler].balls += 1;
-                                if (extra_runs) result[bowler].balls -= 1; // taking account for the extra balls
                         } else {
                                 result[bowler] = {};
                                 result[bowler].runs = total_runs;
                                 result[bowler].balls = 1;
-                                if (extra_runs) result[bowler].balls -= 1; // taking account for the extra balls
                         }
+                        if (extra_runs) result[bowler].balls -= 1;
                 }
         }
 

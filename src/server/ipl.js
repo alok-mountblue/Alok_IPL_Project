@@ -1,15 +1,16 @@
 /* eslint-disable operator-assignment */
 function matchesPlayedPerYear(matches) {
-        const obj = {};
-        for (const match of matches) {
-                const { season } = match;
-                if (obj[season]) {
-                        obj[season] = obj[season] + 1;
+        const result = matches.reduce(function (obj, cur) {
+                // let { season } = cur;
+                if (obj[cur.season]) {
+                        obj[cur.season] += 1;
                 } else {
-                        obj[season] = 1;
+                        obj[cur.season] = 1;
                 }
-        }
-        return obj;
+                return obj;
+        }, {});
+        // console.log(result);
+        return result;
 }
 
 function matchesWonByEachTeam(matches) {

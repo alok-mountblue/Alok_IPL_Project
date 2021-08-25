@@ -20,7 +20,7 @@ Windows: <https://gitforwindows.org/>
 
 ## 3: Install VSCode (Optional)\*\*
 
-git clone <https://github.com/alok-mountblue/Alok_IPL_Project.git>
+vsCode: <https://code.visualstudio.com/download>
 
 ## 4: Clone this repository\*\*
 
@@ -65,6 +65,6 @@ node index.js
 
 **`node_modules`**: This directory is used by node and npm to store third party packages like `csvtojson`.
 
-**`index.js`**: This file contains the code which Reads the csv data, Calls the JavaScript business logic functions and Saves the results in `public/output/.json`
+**`index.js`**: This file contains the code which Reads the csv data, calls the JavaScript business logic functions and saves the results in `public/output/.json`
 
 **`csvtojson`**: In order to do the CSV to JSON conversion, we'll be using the csvtojson package from NPM. This package is a comprehensive Node.js CSV parser to convert CSV to JSON or column arrays.

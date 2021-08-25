@@ -18,19 +18,19 @@ Linux: <https://git-scm.com/downloads>
 
 Windows: <https://gitforwindows.org/>
 
-## 3: Install VSCode\*\*
+## 3: Install VSCode (Optional)\*\*
 
-<https://code.visualstudio.com/download>
+git clone <https://github.com/alok-mountblue/Alok_IPL_Project.git>
 
 ## 4: Clone this repository\*\*
 
-```sh
+```javascript
 git clone https://github.com/alok-mountblue/Alok_IPL_Project.git
 ```
 
 ## 5: Install npm convert-csv-to-json package\*\*
 
-```sh
+```javascript
  npm install convert-csv-to-json --save
 ```
 
@@ -55,7 +55,7 @@ node index.js
 
 **`data`**: This directory contains the dataset: `matches.csv` and `deliveries.csv`.
 
-**`ipl .js`**: This file contains all your JavaScript business logic.
+**`ipl.js`**: This file contains all your JavaScript business logic.
 
 **`public`**: This directory is contains the output directory and output directory contains all json data and also the HTML and JavaScript code required to visualize the results.
 
@@ -65,6 +65,6 @@ node index.js
 
 **`node_modules`**: This directory is used by node and npm to store third party packages like `csvtojson`.
 
-**`index.js`**: This file contains the code which: 1. Reads the csv data 2. Calls the JavaScript business logic functions. 3. Saves the results in `public/output/.json`
+**`index.js`**: This file contains the code which Reads the csv data, Calls the JavaScript business logic functions and Saves the results in `public/output/.json`
 
 **`csvtojson`**: In order to do the CSV to JSON conversion, we'll be using the csvtojson package from NPM. This package is a comprehensive Node.js CSV parser to convert CSV to JSON or column arrays.

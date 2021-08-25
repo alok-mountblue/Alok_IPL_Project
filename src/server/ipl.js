@@ -28,6 +28,7 @@ function matchesWonByEachTeam(matches) {
                         output[season] = {};
                         output[season][winner] = 1;
                 }
+                // console.log(output[season]);
         }
         return output;
 }
@@ -53,7 +54,7 @@ function extraRunsByEachTeam(matches, deliveries) {
                 const { bowling_team } = delivery;
                 if (match_id in team) {
                         if (res[bowling_team]) {
-                                res[bowling_team] += extra_run;
+                                res[bowling_team] = res[bowling_team] + extra_run;
                         } else {
                                 res[bowling_team] = extra_run;
                         }
@@ -67,7 +68,7 @@ function extraRunsByEachTeam(matches, deliveries) {
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 function topEconomicalBowlers(matches, deliveries) {
-        const result = {};
+        const object = {};
 
         const matchID = [];
 
@@ -89,23 +90,25 @@ function topEconomicalBowlers(matches, deliveries) {
                 const extra_runs = parseInt(delivery.extra_runs);
                 const { bowler } = delivery;
                 if (matchID.includes(match_id)) {
-                        if (result[bowler]) {
-                                result[bowler].runs += total_runs;
-                                result[bowler].balls += 1;
+                        if (object[bowler]) {
+                                object[bowler].runs = object[bowler].runs + total_runs;
+                                object[bowler].balls += 1;
                         } else {
-                                result[bowler] = {};
-                                result[bowler].runs = total_runs;
-                                result[bowler].balls = 1;
+                                object[bowler] = {};
+                                object[bowler].runs = object[bowler].runs + total_runs;
+                                object[bowler].balls = 1;
                         }
-                        if (extra_runs) result[bowler].balls -= 1;
+                        if (extra_runs) {
+                                object[bowler].balls = object[bowler].balls - 1;
+                        }
                 }
         }
 
         // calculating the economy for each bowler
-        for (const bowler in result) {
-                const { runs } = result[bowler];
-                const overs = result[bowler].balls / 6;
-                const economy = (runs / overs).toFixed(2);
+        for (const bowler in object) {
+                const { runs } = object[bowler];
+                const overs = object[bowler].balls;
+                const economy = (runs / (overs / 6)).toFixed(2);
                 economicBowlers.push({ bowler, economy });
         }
 

@@ -68,7 +68,7 @@ function extraRunsByEachTeam(matches, deliveries) {
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 function topEconomicalBowlers(matches, deliveries) {
-        const object = {};
+        const result = {};
 
         const matchID = [];
 
@@ -90,30 +90,27 @@ function topEconomicalBowlers(matches, deliveries) {
                 const extra_runs = parseInt(delivery.extra_runs);
                 const { bowler } = delivery;
                 if (matchID.includes(match_id)) {
-                        if (object[bowler]) {
-                                object[bowler].runs = object[bowler].runs + total_runs;
-                                object[bowler].balls += 1;
+                        if (result[bowler]) {
+                                result[bowler].runs += total_runs;
+                                result[bowler].balls += 1;
                         } else {
-                                object[bowler] = {};
-                                object[bowler].runs = object[bowler].runs + total_runs;
-                                object[bowler].balls = 1;
+                                result[bowler] = {};
+                                result[bowler].runs = total_runs;
+                                result[bowler].balls = 1;
                         }
-                        if (extra_runs) {
-                                object[bowler].balls = object[bowler].balls - 1;
-                        }
+                        if (extra_runs) result[bowler].balls -= 1;
                 }
         }
 
         // calculating the economy for each bowler
-        for (const bowler in object) {
-                const { runs } = object[bowler];
-                const overs = object[bowler].balls;
-                const economy = (runs / (overs / 6)).toFixed(2);
+        for (const bowler in result) {
+                const { runs } = result[bowler];
+                const overs = result[bowler].balls / 6;
+                const economy = (runs / overs).toFixed(2);
                 economicBowlers.push({ bowler, economy });
         }
 
         // returning only the top 10 economical bowlers
         return economicBowlers.sort((a, b) => parseFloat(a.economy) - parseFloat(b.economy)).slice(0, 10);
 }
-
 module.exports = { matchesPlayedPerYear, matchesWonByEachTeam, extraRunsByEachTeam, topEconomicalBowlers };

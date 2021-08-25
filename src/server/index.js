@@ -62,7 +62,10 @@ function saveExtraRunsConcededByEach(resultExRun) {
 }
 
 function saveTopEconomicalBowlers(ecobowler) {
-        const jsonString = JSON.stringify(ecobowler);
+        const jsonData = {
+                topEconominBlowers: ecobowler,
+        };
+        const jsonString = JSON.stringify(jsonData);
         fs.writeFile(JSON_OUTPUT_FILE_PATH_FOURTH, jsonString, 'utf8', (err) => {
                 if (err) {
                         console.error(err);

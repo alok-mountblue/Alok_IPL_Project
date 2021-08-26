@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable operator-assignment */
 function matchesPlayedPerYear(matches) {
         const result = matches.reduce(function (obj, cur) {
@@ -14,55 +16,45 @@ function matchesPlayedPerYear(matches) {
 }
 
 function matchesWonByEachTeam(matches) {
-        const output = {};
-        for (const match of matches) {
-                const { season } = match;
-                const { winner } = match;
-
-                if (output[season]) {
-                        if (output[season][winner]) {
-                                output[season][winner] = output[season][winner] + 1;
+        const matchesWon = matches.reduce(function (obj, cur) {
+                if (obj.hasOwnProperty(cur.season)) {
+                        if (obj[cur.season].hasOwnProperty(cur.winner)) {
+                                obj[cur.season][cur.winner] += 1;
                         } else {
-                                output[season][winner] = 1;
+                                obj[cur.season][cur.winner] = 1;
                         }
                 } else {
-                        output[season] = {};
-                        output[season][winner] = 1;
+                        obj[cur.season] = {};
+                        obj[cur.season][cur.winner] = 1;
                 }
-                // console.log(output[season]);
-        }
-        return output;
+                return obj;
+        }, {});
+        return matchesWon;
 }
 
 /* eslint-disable camelcase */
 function extraRunsByEachTeam(matches, deliveries) {
-        const res = {};
-        const team = {};
+        // const matchesId = matches.filter(match => match.season == 2016).map(element => element.id);
+        const matchesId = matches
+                .filter(function (match) {
+                        return match.season == 2016;
+                })
+                .map(function (element) {
+                        return element.id;
+                });
+        const extraRunPerTeams = deliveries.reduce(function (output, current) {
+                if (matchesId.includes(current.match_id)) {
+                        const extra = parseInt(current.extra_runs);
 
-        for (const match of matches) {
-                const { id } = match;
-                const { team1 } = match;
-                const { team2 } = match;
-                // eslint-disable-next-line eqeqeq
-                if (match.season == 2016) {
-                        team[id] = { team1, team2 };
-                }
-        }
-
-        for (const delivery of deliveries) {
-                const { match_id } = delivery;
-                const extra_run = parseInt(delivery.extra_runs);
-                const { bowling_team } = delivery;
-                if (match_id in team) {
-                        if (res[bowling_team]) {
-                                res[bowling_team] = res[bowling_team] + extra_run;
+                        if (output.hasOwnProperty(current.bowling_team)) {
+                                output[current.bowling_team] += extra;
                         } else {
-                                res[bowling_team] = extra_run;
+                                output[current.bowling_team] = extra;
                         }
                 }
-        }
-
-        return res;
+                return output;
+        }, {});
+        return extraRunPerTeams;
 }
 
 /* eslint-disable camelcase */
@@ -70,43 +62,39 @@ function extraRunsByEachTeam(matches, deliveries) {
 /* eslint-disable no-restricted-syntax */
 function topEconomicalBowlers(matches, deliveries) {
         const result = {};
-
-        const matchID = [];
-
         const economicBowlers = [];
 
+        const matchID = matches.filter((match) => match.season == 2015).map((element) => element.id);
         // Getting the match ids played in year 2015
-        for (const match of matches) {
-                const { id } = match;
-                // eslint-disable-next-line eqeqeq
-                if (match.season == 2015) {
-                        matchID.push(id);
-                }
-        }
+        // for (const match of matches) {
+        //         const { id } = match;
+        //         // eslint-disable-next-line eqeqeq
+        //         if (match.season == 2015) {
+        //                 matchID.push(id);
+        //         }
+        // }
 
-        // getting the balls and runs by each bowler
-        for (const delivery of deliveries) {
-                const { match_id } = delivery;
-                const total_runs = parseInt(delivery.total_runs);
-                const extra_runs = parseInt(delivery.extra_runs);
-                const { bowler } = delivery;
-                if (matchID.includes(match_id)) {
-                        if (result[bowler]) {
-                                result[bowler].runs += total_runs;
-                                result[bowler].balls += 1;
+        const output = deliveries.reduce((acc, cur) => {
+                const total_runs = parseInt(cur.total_runs);
+                const extra_runs = parseInt(cur.extra_runs);
+                if (matchID.includes(cur.match_id)) {
+                        if (acc.hasOwnProperty(cur.bowler)) {
+                                acc[cur.bowler].runs += total_runs;
+                                acc[cur.bowler].balls += 1;
                         } else {
-                                result[bowler] = {};
-                                result[bowler].runs = total_runs;
-                                result[bowler].balls = 1;
+                                acc[cur.bowler] = {
+                                        runs: total_runs,
+                                        balls: 1,
+                                };
                         }
-                        if (extra_runs) result[bowler].balls -= 1;
+                        if (extra_runs) acc[cur.bowler].balls -= 1;
                 }
-        }
-
+                return acc;
+        }, {});
         // calculating the economy for each bowler
-        for (const bowler in result) {
-                const { runs } = result[bowler];
-                const overs = result[bowler].balls / 6;
+        for (const bowler in output) {
+                const { runs } = output[bowler];
+                const overs = output[bowler].balls / 6;
                 const economy = (runs / overs).toFixed(2);
                 economicBowlers.push({ bowler, economy });
         }

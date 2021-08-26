@@ -3,7 +3,6 @@
 /* eslint-disable operator-assignment */
 function matchesPlayedPerYear(matches) {
         const result = matches.reduce(function (obj, cur) {
-                // let { season } = cur;
                 if (obj[cur.season]) {
                         obj[cur.season] += 1;
                 } else {
@@ -61,18 +60,9 @@ function extraRunsByEachTeam(matches, deliveries) {
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 function topEconomicalBowlers(matches, deliveries) {
-        const result = {};
         const economicBowlers = [];
 
         const matchID = matches.filter((match) => match.season == 2015).map((element) => element.id);
-        // Getting the match ids played in year 2015
-        // for (const match of matches) {
-        //         const { id } = match;
-        //         // eslint-disable-next-line eqeqeq
-        //         if (match.season == 2015) {
-        //                 matchID.push(id);
-        //         }
-        // }
 
         const output = deliveries.reduce((acc, cur) => {
                 const total_runs = parseInt(cur.total_runs);

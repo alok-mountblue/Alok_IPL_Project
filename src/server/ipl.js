@@ -95,7 +95,7 @@ function topEconomicalBowlers(matches, deliveries) {
                                 object[bowler].balls += 1;
                         } else {
                                 object[bowler] = {};
-                                object[bowler].runs = object[bowler].runs + total_runs;
+                                object[bowler].runs = total_runs;
                                 object[bowler].balls = 1;
                         }
                         if (extra_runs) {

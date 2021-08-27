@@ -3,7 +3,8 @@ function matchesPlayedPerYear(matches) {
         const obj = {};
         for (const match of matches) {
                 const { season } = match;
-                if (obj[season]) {
+                // eslint-disable-next-line no-prototype-builtins
+                if (obj.hasOwnProperty(season)) {
                         obj[season] = obj[season] + 1;
                 } else {
                         obj[season] = 1;
@@ -26,7 +27,7 @@ function matchesWonByEachTeam(matches) {
                         }
                 } else {
                         output[season] = {};
-                        output[season][winner] = 1;
+                        // output[season][winner] = 1;
                 }
                 // console.log(output[season]);
         }
@@ -39,9 +40,7 @@ function extraRunsByEachTeam(matches, deliveries) {
         const team = {};
 
         for (const match of matches) {
-                const { id } = match;
-                const { team1 } = match;
-                const { team2 } = match;
+                const { id, team1, team2 } = match;
                 // eslint-disable-next-line eqeqeq
                 if (match.season == 2016) {
                         team[id] = { team1, team2 };
@@ -49,9 +48,8 @@ function extraRunsByEachTeam(matches, deliveries) {
         }
 
         for (const delivery of deliveries) {
-                const { match_id } = delivery;
+                const { match_id, bowling_team } = delivery;
                 const extra_run = parseInt(delivery.extra_runs);
-                const { bowling_team } = delivery;
                 if (match_id in team) {
                         if (res[bowling_team]) {
                                 res[bowling_team] = res[bowling_team] + extra_run;
@@ -105,11 +103,11 @@ function topEconomicalBowlers(matches, deliveries) {
         }
 
         // calculating the economy for each bowler
-        for (const bowler in object) {
-                const { runs } = object[bowler];
-                const overs = object[bowler].balls;
+        for (const bowlers in object) {
+                const { runs } = object[bowlers];
+                const overs = object[bowlers].balls;
                 const economy = (runs / (overs / 6)).toFixed(2);
-                economicBowlers.push({ bowler, economy });
+                economicBowlers.push({ bowlers, economy });
         }
 
         // returning only the top 10 economical bowlers

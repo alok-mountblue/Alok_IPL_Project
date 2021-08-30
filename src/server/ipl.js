@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable operator-assignment */
+console.log('hello');
 function matchesPlayedPerYear(matches) {
         const result = matches.reduce(function (obj, cur) {
                 if (obj[cur.season]) {

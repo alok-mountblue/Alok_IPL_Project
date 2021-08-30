@@ -31,7 +31,7 @@ git clone https://github.com/alok-mountblue/Alok_IPL_Project.git
 ## 5: Install npm convert-csv-to-json package\*\*
 
 ```javascript
- npm install convert-csv-to-json --save
+ npm install csvtojson --save
 ```
 
 ## 6: Prepare data\*\*
@@ -40,16 +40,13 @@ git clone https://github.com/alok-mountblue/Alok_IPL_Project.git
 node index.js
 ```
 
-## 7: Start server\*\*
+## 7: Visualize results on your browser\*\*
+
+1. open dir cd src/public.
+2. run python3 -m http.server.
 
 ```javascript
-npm run start
-```
-
-## 8: Visualize results on your browser\*\*
-
-```javascript
-Open http://127.0.0.1:8080/src/public
+Open http://localhost:8000
 ```
 
 ---

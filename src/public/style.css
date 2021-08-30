@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+  }
+  .container {
+    min-width: 310px;
+    height: 450px;
+    margin: 15px 1em;
+    margin-bottom: 100px;
+    border: 2px black solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+  

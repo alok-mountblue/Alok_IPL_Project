@@ -4,13 +4,13 @@
   "description": "IPL data Project-I",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "start": "http-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "csvtojson": "^2.0.10"
+    "csvtojson": "^2.0.10",
+    "http-server": "^13.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

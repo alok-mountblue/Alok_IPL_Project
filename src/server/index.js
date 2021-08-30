@@ -35,6 +35,9 @@ function main() {
 main();
 
 function saveMatchesPlayedPerYear(result) {
+        // const jsonData = {
+        //         matchPlayedPerYear: result,
+        // };
         const jsonString = JSON.stringify(result);
         fs.writeFile(JSON_OUTPUT_FILE_PATH_FIRST, jsonString, 'utf8', (err) => {
                 if (err) {
@@ -62,10 +65,10 @@ function saveExtraRunsConcededByEach(resultExRun) {
 }
 
 function saveTopEconomicalBowlers(ecobowler) {
-        const jsonData = {
-                topEconominBlowers: ecobowler,
-        };
-        const jsonString = JSON.stringify(jsonData);
+        // const jsonData = {
+        //         topEconominBlowers: ecobowler,
+        // };
+        const jsonString = JSON.stringify(ecobowler);
         fs.writeFile(JSON_OUTPUT_FILE_PATH_FOURTH, jsonString, 'utf8', (err) => {
                 if (err) {
                         console.error(err);

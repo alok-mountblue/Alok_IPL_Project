@@ -148,7 +148,7 @@ function visualizeMatchesWonByEachTeam(matchesWonByTeams) {
                         type: 'column',
                 },
                 title: {
-                        text: '2. Matches Won By Teams Over All The Years',
+                        text: '3. Matches Won By Teams Over All The Years',
                 },
                 subtitle: {
                         text: 'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>',
@@ -163,15 +163,15 @@ function visualizeMatchesWonByEachTeam(matchesWonByTeams) {
                                 text: 'Matches Won',
                         },
                 },
-                // tooltip: {
-                //         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                //         pointFormat:
-                //                 '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                //                 '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-                //         footerFormat: '</table>',
-                //         shared: true,
-                //         useHTML: true,
-                // },
+                tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat:
+                                '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true,
+                },
                 plotOptions: {
                         column: {
                                 pointPadding: 0.2,

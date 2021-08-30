@@ -42,7 +42,7 @@ cd src/server
 node index.js
 ```
 
-## 6: Visualize results on your browser\*\*
+## 7: Visualize results on your browser\*\*
 
 ```javascript
 cd ../public

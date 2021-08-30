@@ -65,7 +65,7 @@ function visualizeExtraRunsData(data) {
                         type: 'column',
                 },
                 title: {
-                        text: '2. Extra Runs Conceded by Each Team in 2016',
+                        text: '3. Extra Runs Conceded by Each Team in 2016',
                 },
                 subtitle: {
                         text: 'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>',
@@ -119,16 +119,14 @@ function visualizeMatchesWonByEachTeam(matchesWonByTeams) {
         for (const y in matchesWonByTeams) {
                 year.push(y);
         }
-        console.log(year);
         const teams = [];
         // console.log(Object.keys(matchesWonByTeams[0])[0]);
         for (const y in matchesWonByTeams) {
                 for (let j = 0; j < Object.keys(matchesWonByTeams[y]).length; j++) {
                         if (!teams.includes(Object.keys(matchesWonByTeams[y])[j]))
-                                console.log(teams.push(Object.keys(matchesWonByTeams[y])[j]));
+                                teams.push(Object.keys(matchesWonByTeams[y])[j]);
                 }
         }
-        console.log(teams);
         const seriesData = [];
         for (const teamName of teams) {
                 const data = [];
@@ -148,7 +146,7 @@ function visualizeMatchesWonByEachTeam(matchesWonByTeams) {
                         type: 'column',
                 },
                 title: {
-                        text: '3. Matches Won By Teams Over All The Years',
+                        text: '2. Matches Won By Teams Over All The Years',
                 },
                 subtitle: {
                         text: 'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>',
@@ -187,15 +185,16 @@ function fetchAndVisualizeDataFourth() {
                 .then((ele) => ele.json())
                 .then((data) => {
                         visualizeTopBowler(data);
-                        console.log(data);
                 });
 }
 fetchAndVisualizeDataFourth();
+
 function visualizeTopBowler(topEconomicalBowlers) {
         const seriesData = [];
-
-        for (const item of topEconomicalBowlers) {
-                seriesData.push([item.bowler, parseFloat(item.economy)]);
+        const bowlerName = [];
+        for(let i=0;i<topEconomicalBowlers.length;i++){
+                seriesData.push(parseFloat(topEconomicalBowlers[i][1]));
+                bowlerName.push(topEconomicalBowlers[i][0]);
         }
 
         Highcharts.chart('topBowlers', {
@@ -209,7 +208,7 @@ function visualizeTopBowler(topEconomicalBowlers) {
                         text: 'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>',
                 },
                 xAxis: {
-                        type: 'category',
+                        categories : bowlerName,
                         labels: {
                                 rotation: -45,
                                 style: {

@@ -37,15 +37,16 @@ git clone https://github.com/alok-mountblue/Alok_IPL_Project.git
 ## 6: Prepare data\*\*
 
 ```javascript
-node index.js
+go to cd src/server
+run - node index.js
 ```
 
 ## 7: Visualize results on your browser\*\*
 
+```javascript
 1. open dir cd src/public.
 2. run python3 -m http.server.
 
-```javascript
 Open http://localhost:8000
 ```
 

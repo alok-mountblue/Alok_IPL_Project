@@ -81,6 +81,7 @@ function topEconomicalBowlers(matches, deliveries) {
                 }
                 return acc;
         }, {});
+        // console.log(output);
 
         // calculating the economy for each bowler
         for (const bowler in output) {
@@ -91,6 +92,6 @@ function topEconomicalBowlers(matches, deliveries) {
         }
 
         // returning only the top 10 economical bowlers
-        return economicBowlers.sort((a, b) => b.economy - a.economy).slice(0, 10);
+        return economicBowlers.sort((a, b) => parseFloat(a.economy) - parseFloat(b.economy)).slice(0, 10);
 }
 module.exports = { matchesPlayedPerYear, matchesWonByEachTeam, extraRunsByEachTeam, topEconomicalBowlers };

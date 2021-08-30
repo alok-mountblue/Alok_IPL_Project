@@ -102,16 +102,17 @@ function topEconomicalBowlers(matches, deliveries) {
                 }
         }
 
-        // calculating the economy for each bowler
-        for (const bowlers in object) {
-                const { runs } = object[bowlers];
-                const overs = object[bowlers].balls;
-                const economy = (runs / (overs / 6)).toFixed(2);
-                economicBowlers.push({ bowlers, economy });
-        }
+        let keys = Object.keys(object).reduce(function (result, current) {
+                result[current] = (object[current].runs * 6 / object[current].balls).toFixed(2);
+                return result;
+            }, {})
+            let economicalBowlers = Object.entries(keys).sort(function (temp1, temp2) {
+                return temp1[1] - temp2[1];
 
-        // returning only the top 10 economical bowlers
-        return economicBowlers.sort((a, b) => parseFloat(a.economy) - parseFloat(b.economy)).slice(0, 10);
+            }).slice(0, 10);
+
+            return economicalBowlers;
+
 }
 
 module.exports = { matchesPlayedPerYear, matchesWonByEachTeam, extraRunsByEachTeam, topEconomicalBowlers };

@@ -1,1 +1,12 @@
-{"topEconominBlowers":[{"bowler":"Shivam Sharma","economy":"14.67"},{"bowler":"KC Cariappa","economy":"14.00"},{"bowler":"SN Thakur","economy":"13.76"},{"bowler":"Azhar Mahmood","economy":"13.67"},{"bowler":"AB Dinda","economy":"13.03"},{"bowler":"BB Sran","economy":"12.71"},{"bowler":"JJ Bumrah","economy":"12.27"},{"bowler":"I Sharma","economy":"11.78"},{"bowler":"Karanveer Singh","economy":"11.63"},{"bowler":"PP Ojha","economy":"11.50"}]}
+[
+  { "bowler": "RN ten Doeschate", "economy": "4.00" },
+  { "bowler": "J Yadav", "economy": "4.14" },
+  { "bowler": "V Kohli", "economy": "5.45" },
+  { "bowler": "R Ashwin", "economy": "5.90" },
+  { "bowler": "S Nadeem", "economy": "6.14" },
+  { "bowler": "Parvez Rasool", "economy": "6.20" },
+  { "bowler": "MC Henriques", "economy": "6.69" },
+  { "bowler": "Z Khan", "economy": "6.72" },
+  { "bowler": "M Vijay", "economy": "7.00" },
+  { "bowler": "Bipul Sharma", "economy": "7.14" }
+]

@@ -40,6 +40,18 @@ git clone https://github.com/alok-mountblue/Alok_IPL_Project.git
 node index.js
 ```
 
+## 7: Start server\*\*
+
+```javascript
+npm run start
+```
+
+## 8: Visualize results on your browser\*\*
+
+```javascript
+Open http://127.0.0.1:8080/src/public
+```
+
 ---
 
 # Problems

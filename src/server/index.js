@@ -1,10 +1,10 @@
+const { matchesPlayedPerYear, matchesWonByEachTeam, extraRunsByEachTeam, topEconomicalBowlers } = require('./ipl');
+
 const fs = require('fs');
 const csv = require('csvtojson');
 
 const MATCHES_FILE_PATH = '../data/matches.csv';
 const DELIVERIES_FILE_PATH = '../data/deliveries.csv';
-
-const { matchesPlayedPerYear, matchesWonByEachTeam, extraRunsByEachTeam, topEconomicalBowlers } = require('./ipl');
 
 const JSON_OUTPUT_FILE_PATH_FIRST = '../public/output/matchesPerYear.json';
 const JSON_OUTPUT_FILE_PATH_SECOND = '../public/output/matchesWonEachTeam.json';
@@ -19,59 +19,33 @@ function main() {
                                 .fromFile(DELIVERIES_FILE_PATH)
                                 .then((deliveries) => {
                                         const matchesPlayed = matchesPlayedPerYear(matches);
-                                        saveMatchesPlayedPerYear(matchesPlayed);
-
                                         const matcheWonPerYear = matchesWonByEachTeam(matches);
-                                        saveMatchesWonEachTeamPerYear(matcheWonPerYear);
-
                                         const extraRunConceded = extraRunsByEachTeam(matches, deliveries);
-                                        saveExtraRunsConcededByEach(extraRunConceded);
-
                                         const resultEcoBowl = topEconomicalBowlers(matches, deliveries);
-                                        saveTopEconomicalBowlers(resultEcoBowl);
+
+                                        savePlayersData(matchesPlayed, matcheWonPerYear, extraRunConceded, resultEcoBowl);
                                 });
                 });
 }
 main();
 
-function saveMatchesPlayedPerYear(result) {
-        // const jsonData = {
-        //         matchPlayedPerYear: result,
-        // };
-        const jsonString = JSON.stringify(result);
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_FIRST, jsonString, 'utf8', (err) => {
+function savePlayersData(matchesPlayed, matcheWonPerYear,extraRunConceded, resultEcoBowl) {
+        
+        fs.writeFile(JSON_OUTPUT_FILE_PATH_FIRST, JSON.stringify(matchesPlayed), 'utf8', (err) => { 
                 if (err) {
-                        console.error(err);
-                }
-        });
+                        console.log(err);
+                }});
+        fs.writeFile(JSON_OUTPUT_FILE_PATH_SECOND, JSON.stringify(matcheWonPerYear), 'utf8', (err) => {
+                if (err) {
+                        console.log(err);
+                }});
+        fs.writeFile(JSON_OUTPUT_FILE_PATH_THIRD, JSON.stringify(extraRunConceded), 'utf8', (err) => { 
+                if (err) {
+                        console.log(err);
+                }});
+        fs.writeFile(JSON_OUTPUT_FILE_PATH_FOURTH, JSON.stringify(resultEcoBowl), 'utf8', (err) => { 
+                if (err) {
+                          console.log(err);
+                }});
 }
 
-function saveMatchesWonEachTeamPerYear(matcheWonPerY) {
-        const jsonString = JSON.stringify(matcheWonPerY);
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_SECOND, jsonString, 'utf8', (err) => {
-                if (err) {
-                        console.error(err);
-                }
-        });
-}
-
-function saveExtraRunsConcededByEach(resultExRun) {
-        const jsonString = JSON.stringify(resultExRun);
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_THIRD, jsonString, 'utf8', (err) => {
-                if (err) {
-                        console.error(err);
-                }
-        });
-}
-
-function saveTopEconomicalBowlers(ecobowler) {
-        // const jsonData = {
-        //         topEconominBlowers: ecobowler,
-        // };
-        const jsonString = JSON.stringify(ecobowler);
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_FOURTH, jsonString, 'utf8', (err) => {
-                if (err) {
-                        console.error(err);
-                }
-        });
-}

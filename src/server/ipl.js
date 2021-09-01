@@ -34,7 +34,7 @@ function matchesWonByEachTeam(matches) {
         return output;
 }
 
-/* eslint-disable camelcase */
+
 function extraRunsByEachTeam(matches, deliveries) {
         const res = {};
         const team = {};
@@ -48,13 +48,14 @@ function extraRunsByEachTeam(matches, deliveries) {
         }
 
         for (const delivery of deliveries) {
-                const { match_id, bowling_team } = delivery;
-                const extra_run = parseInt(delivery.extra_runs);
-                if (match_id in team) {
-                        if (res[bowling_team]) {
-                                res[bowling_team] = res[bowling_team] + extra_run;
+                const matchId= delivery.match_id;
+                const bowlingTeam= delivery.bowling_team
+                const extraRun = parseInt(delivery.extra_runs);
+                if (matchId in team) {
+                        if (res[bowlingTeam]) {
+                                res[bowlingTeam] = res[bowlingTeam] + extraRun;
                         } else {
-                                res[bowling_team] = extra_run;
+                                res[bowlingTeam] = extraRun;
                         }
                 }
         }
@@ -70,8 +71,6 @@ function topEconomicalBowlers(matches, deliveries) {
 
         const matchID = [];
 
-        const economicBowlers = [];
-
         // Getting the match ids played in year 2015
         for (const match of matches) {
                 const { id } = match;
@@ -83,31 +82,33 @@ function topEconomicalBowlers(matches, deliveries) {
 
         // getting the balls and runs by each bowler
         for (const delivery of deliveries) {
-                const { match_id } = delivery;
-                const total_runs = parseInt(delivery.total_runs);
-                const extra_runs = parseInt(delivery.extra_runs);
-                const { bowler } = delivery;
-                if (matchID.includes(match_id)) {
+                const matchId= delivery.match_id;
+                const totalRuns = parseInt(delivery.total_runs);
+                const extraRuns = parseInt(delivery.extra_runs);
+                const bowler = delivery.bowler;
+                if (matchID.includes(matchId)) {
                         if (object[bowler]) {
-                                object[bowler].runs = object[bowler].runs + total_runs;
+                                object[bowler].runs = object[bowler].runs + totalRuns;
                                 object[bowler].balls += 1;
                         } else {
                                 object[bowler] = {};
-                                object[bowler].runs = total_runs;
+                                object[bowler].runs = totalRuns;
                                 object[bowler].balls = 1;
                         }
-                        if (extra_runs) {
+                        if (extraRuns) {
                                 object[bowler].balls = object[bowler].balls - 1;
                         }
                 }
         }
 
         let keys = Object.keys(object).reduce(function (result, current) {
-                result[current] = (object[current].runs * 6 / object[current].balls).toFixed(2);
+                const runs = object[current].runs;
+                const overs = object[current].balls/6;
+                result[current] = (runs / overs).toFixed(2);
                 return result;
             }, {})
-            let economicalBowlers = Object.entries(keys).sort(function (temp1, temp2) {
-                return temp1[1] - temp2[1];
+             let economicalBowlers = Object.entries(keys).sort(function (t1, t2) {
+                return t1[1] - t2[1];
 
             }).slice(0, 10);
 

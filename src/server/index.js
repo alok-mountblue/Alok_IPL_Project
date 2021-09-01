@@ -4,7 +4,7 @@ const fs = require('fs');
 const csv = require('csvtojson');
 
 const matchesPath = '../data/matches.csv';
-const DeliveriesPath= '../data/deliveries.csv';
+const deliveriesPath= '../data/deliveries.csv';
 
 const JsonOutputFilePathFirst = '../public/output/matchesPerYear.json';
 const JsonOutputFilePathSecond = '../public/output/matchesWonEachTeam.json';
@@ -16,7 +16,7 @@ function main() {
                 .fromFile(matchesPath)
                 .then((matches) => {
                         csv()
-                                .fromFile(DeliveriesPath)
+                                .fromFile(deliveriesPath)
                                 .then((deliveries) => {
                                         const matchesPlayed = matchesPlayedPerYear(matches);
                                         const matcheWonPerYear = matchesWonByEachTeam(matches);

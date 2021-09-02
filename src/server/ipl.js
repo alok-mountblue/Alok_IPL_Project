@@ -1,28 +1,18 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable operator-assignment */
-console.log('hello');
 function matchesPlayedPerYear(matches) {
         const result = matches.reduce(function (obj, cur) {
-                if (obj[cur.season]) {
-                        obj[cur.season] += 1;
-                } else {
-                        obj[cur.season] = 1;
-                }
+                (obj[cur.season]) ? obj[cur.season] += 1 : obj[cur.season] = 1;
                 return obj;
         }, {});
-        // console.log(result);
         return result;
 }
 
 function matchesWonByEachTeam(matches) {
         const matchesWon = matches.reduce(function (obj, cur) {
                 if (obj.hasOwnProperty(cur.season)) {
-                        if (obj[cur.season].hasOwnProperty(cur.winner)) {
-                                obj[cur.season][cur.winner] += 1;
-                        } else {
-                                obj[cur.season][cur.winner] = 1;
-                        }
+                        obj[cur.season].hasOwnProperty(cur.winner) ? obj[cur.season][cur.winner] += 1 : obj[cur.season][cur.winner] = 1;
                 } else {
                         obj[cur.season] = {};
                         obj[cur.season][cur.winner] = 1;

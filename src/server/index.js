@@ -1,15 +1,16 @@
-const { matchesPlayedPerYear, matchesWonByEachTeam, extraRunsByEachTeam, topEconomicalBowlers } = require('./ipl');
 
 const fs = require('fs');
 const csv = require('csvtojson');
 
-const MATCHES_FILE_PATH = '../data/matches.csv';
+const MATCHES_FILE_PATH = '../data/matche.csv';
 const DELIVERIES_FILE_PATH = '../data/deliveries.csv';
 
 const JSON_OUTPUT_FILE_PATH_FIRST = '../public/output/matchesPerYear.json';
 const JSON_OUTPUT_FILE_PATH_SECOND = '../public/output/matchesWonEachTeam.json';
 const JSON_OUTPUT_FILE_PATH_THIRD = '../public/output/extraRunsConcededByEachTeam.json';
 const JSON_OUTPUT_FILE_PATH_FOURTH = '../public/output/economicalBowlers.json';
+
+const { matchesPlayedPerYear, matchesWonByEachTeam, extraRunsByEachTeam, topEconomicalBowlers } = require('./ipl');
 
 function main() {
         csv()
@@ -23,29 +24,22 @@ function main() {
                                         const extraRunConceded = extraRunsByEachTeam(matches, deliveries);
                                         const resultEcoBowl = topEconomicalBowlers(matches, deliveries);
 
-                                        savePlayersData(matchesPlayed, matcheWonPerYear, extraRunConceded, resultEcoBowl);
-                                });
-                });
+                                         savePlayerData(matchesPlayed, JSON_OUTPUT_FILE_PATH_FIRST)
+                                         savePlayerData(matcheWonPerYear, JSON_OUTPUT_FILE_PATH_SECOND)
+                                         savePlayerData(extraRunConceded, JSON_OUTPUT_FILE_PATH_THIRD)
+                                         savePlayerData(resultEcoBowl, JSON_OUTPUT_FILE_PATH_FOURTH);
+                                })
+                                .catch(e => console.error(e.message)); 
+                })
+                .catch(e => console.error(e.message));
 }
 main();
 
-function savePlayersData(matchesPlayed, matcheWonPerYear,extraRunConceded, resultEcoBowl) {
+function savePlayerData(data, location) {
         
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_FIRST, JSON.stringify(matchesPlayed), 'utf8', (err) => { 
+        fs.writeFile(location, JSON.stringify(data), 'utf8', (err) => { 
                 if (err) {
                         console.log(err);
-                }});
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_SECOND, JSON.stringify(matcheWonPerYear), 'utf8', (err) => {
-                if (err) {
-                        console.log(err);
-                }});
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_THIRD, JSON.stringify(extraRunConceded), 'utf8', (err) => { 
-                if (err) {
-                        console.log(err);
-                }});
-        fs.writeFile(JSON_OUTPUT_FILE_PATH_FOURTH, JSON.stringify(resultEcoBowl), 'utf8', (err) => { 
-                if (err) {
-                          console.log(err);
                 }});
 }
 
